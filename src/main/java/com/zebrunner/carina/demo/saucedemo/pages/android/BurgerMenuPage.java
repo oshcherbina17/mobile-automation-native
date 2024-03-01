@@ -1,6 +1,7 @@
 package com.zebrunner.carina.demo.saucedemo.pages.android;
 
 import com.zebrunner.carina.demo.saucedemo.pages.common.BurgerMenuPageBase;
+import com.zebrunner.carina.demo.saucedemo.pages.common.DrawingPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.LoginPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
@@ -32,5 +33,11 @@ public class BurgerMenuPage extends BurgerMenuPageBase {
     public LoginPageBase clickOnLogoutBtn() {
         logoutBtn.click();
         return initPage(getDriver(), LoginPageBase.class);
+    }
+
+    @Override
+    public DrawingPageBase clickOnDrawingButton() {
+        drawingBtn.click();
+        return initPage(getDriver(), DrawingPageBase.class);
     }
 }

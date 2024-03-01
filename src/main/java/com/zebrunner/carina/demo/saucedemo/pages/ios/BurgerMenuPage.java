@@ -1,6 +1,7 @@
 package com.zebrunner.carina.demo.saucedemo.pages.ios;
 
 import com.zebrunner.carina.demo.saucedemo.pages.common.BurgerMenuPageBase;
+import com.zebrunner.carina.demo.saucedemo.pages.common.DrawingPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.LoginPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
@@ -17,6 +18,10 @@ public class BurgerMenuPage extends BurgerMenuPageBase {
     protected ExtendedWebElement drawingBtn;
     @ExtendedFindBy(iosPredicate = "name == 'test-Close'")
     protected ExtendedWebElement closeBtn;
+
+    @ExtendedFindBy(iosPredicate = "name == 'test-DRAWING'")
+    private ExtendedWebElement drawingButton;
+
     public BurgerMenuPage(WebDriver driver) {
         super(driver);
     }
@@ -30,5 +35,11 @@ public class BurgerMenuPage extends BurgerMenuPageBase {
     public LoginPageBase clickOnLogoutBtn() {
         logoutBtn.click();
         return initPage(getDriver(), LoginPageBase.class);
+    }
+
+    @Override
+    public DrawingPageBase clickOnDrawingButton() {
+        drawingButton.click();
+        return initPage(getDriver(), DrawingPageBase.class);
     }
 }

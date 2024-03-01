@@ -11,4 +11,6 @@ public abstract class BurgerMenuPageBase extends AbstractPage {
     public abstract boolean isLogoutPresent();
 
     public abstract LoginPageBase clickOnLogoutBtn();
+
+    public abstract DrawingPageBase clickOnDrawingButton();
 }
