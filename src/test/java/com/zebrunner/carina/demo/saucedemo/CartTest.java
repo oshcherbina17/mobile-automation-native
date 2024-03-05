@@ -10,18 +10,19 @@ import com.zebrunner.carina.demo.saucedemo.pages.common.LoginPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.ProductListPageBase;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class CartTest implements IAbstractTest {
+
     LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
+
     ProductListPageBase productListPage = initPage(getDriver(), ProductListPageBase.class);
 
     @BeforeMethod
     public void loginTest() {
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
         loginPage.autofillLogin();
-        Assert.assertTrue(productListPage.isBurgerMenuPresent(), "Burger menu isn't presented");
+        Assert.assertTrue(productListPage.getHeader().isBurgerMenuPresent(), "Burger menu isn't presented");
     }
 
     @Test()
@@ -30,7 +31,7 @@ public class CartTest implements IAbstractTest {
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void addProductToCartTest() {
         productListPage.clickAddToCartBtnEnum(ProductName.BACKPACK);
-        CartPageBase cartPage = productListPage.clickOnCartBtn();
+        CartPageBase cartPage = productListPage.getHeader().clickOnCartBtn();
         Assert.assertTrue(cartPage.isProductNameTextPresent(ProductName.BACKPACK), "Product name isn't presented");
     }
 
@@ -40,9 +41,9 @@ public class CartTest implements IAbstractTest {
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void removeProductsFromCartTest() {
         productListPage.clickAddToCartBtnEnum(ProductName.BACKPACK);
-        CartPageBase cartPage = productListPage.clickOnCartBtn();
+        CartPageBase cartPage = productListPage.getHeader().clickOnCartBtn();
         Assert.assertTrue(cartPage.isProductNameTextPresent(ProductName.BACKPACK), "Product name isn't presented");
-        cartPage.removeProductFromCart(ProductName.BACKPACK);
+        cartPage.removeProductsByNameFromCart(ProductName.BACKPACK);
         Assert.assertFalse(cartPage.isProductNameTextPresent(ProductName.BACKPACK),"Product name is presented in the cart");
     }
 }

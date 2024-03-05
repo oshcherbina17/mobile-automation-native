@@ -13,12 +13,15 @@ import java.time.Duration;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = BurgerMenuPageBase.class)
 public class BurgerMenuPage extends BurgerMenuPageBase {
+
     @FindBy(xpath = "//*[@text='LOGOUT']")
-    protected ExtendedWebElement logoutBtn;
+    private ExtendedWebElement logoutBtn;
+
     @FindBy(xpath = "//*[@content-desc='test-DRAWING']")
-    protected ExtendedWebElement drawingBtn;
+    private ExtendedWebElement drawingBtn;
+
     @FindBy(xpath = "*[@content-desc='test-Close']")
-    protected ExtendedWebElement closeBtn;
+    private ExtendedWebElement closeBtn;
 
     public BurgerMenuPage(WebDriver driver) {
         super(driver);

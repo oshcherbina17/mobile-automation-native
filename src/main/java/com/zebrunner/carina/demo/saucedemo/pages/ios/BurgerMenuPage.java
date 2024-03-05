@@ -12,12 +12,15 @@ import java.time.Duration;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = BurgerMenuPageBase.class)
 public class BurgerMenuPage extends BurgerMenuPageBase {
+
     @ExtendedFindBy(iosPredicate = "name == 'test-LOGOUT'")
-    protected ExtendedWebElement logoutBtn;
+    private ExtendedWebElement logoutBtn;
+
     @ExtendedFindBy(iosPredicate = "name == 'test-DRAWING'")
-    protected ExtendedWebElement drawingBtn;
+    private ExtendedWebElement drawingBtn;
+
     @ExtendedFindBy(iosPredicate = "name == 'test-Close'")
-    protected ExtendedWebElement closeBtn;
+    private ExtendedWebElement closeBtn;
 
     @ExtendedFindBy(iosPredicate = "name == 'test-DRAWING'")
     private ExtendedWebElement drawingButton;

@@ -20,8 +20,8 @@ public class LogoutTest implements IAbstractTest {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
         ProductListPageBase productListPage = loginPage.autofillLogin();
-        Assert.assertTrue(productListPage.isBurgerMenuPresent(), "Burger menu isn't presented");
-        BurgerMenuPageBase burgerMenu = productListPage.clickOnBurgerMenu();
+        Assert.assertTrue(productListPage.getHeader().isBurgerMenuPresent(), "Burger menu isn't presented");
+        BurgerMenuPageBase burgerMenu = productListPage.getHeader().clickOnBurgerMenu();
         Assert.assertTrue(burgerMenu.isLogoutPresent(), "Logout button isn't presented");
         burgerMenu.clickOnLogoutBtn();
         Assert.assertTrue(loginPage.isLoginButtonPresent(), "Login button isn't opened");

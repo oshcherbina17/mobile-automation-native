@@ -12,13 +12,16 @@ import org.openqa.selenium.WebDriver;
 public class CheckoutInfoPage extends CheckoutInfoPageBase implements IMobileUtils {
 
     @ExtendedFindBy(iosPredicate = "name == 'test-First Name'")
-    protected ExtendedWebElement firsNameInput;
+    private ExtendedWebElement firsNameInput;
+
     @ExtendedFindBy(iosPredicate = "name == 'test-Last Name'")
-    protected ExtendedWebElement lastNameInput;
+    private ExtendedWebElement lastNameInput;
+
     @ExtendedFindBy(iosPredicate = "name == 'test-Zip/Postal Code'")
-    protected ExtendedWebElement zipInput;
+    private ExtendedWebElement zipInput;
+
     @ExtendedFindBy(iosPredicate = "name == 'test-CONTINUE'")
-    protected ExtendedWebElement continueBtn;
+    private ExtendedWebElement continueBtn;
 
     public CheckoutInfoPage(WebDriver driver) {
         super(driver);

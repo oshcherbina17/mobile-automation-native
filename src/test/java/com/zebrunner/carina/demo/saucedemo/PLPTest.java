@@ -12,14 +12,16 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class PLPTest implements IAbstractTest {
+
     LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
+
     ProductListPageBase productListPage = initPage(getDriver(), ProductListPageBase.class);
 
     @BeforeMethod
     public void loginTest() {
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
         loginPage.autofillLogin();
-        Assert.assertTrue(productListPage.isBurgerMenuPresent(), "Burger menu isn't presented");
+        Assert.assertTrue(productListPage.getHeader().isBurgerMenuPresent(), "Burger menu isn't presented");
     }
 
     @Test()

@@ -10,7 +10,6 @@ public enum SortDropdown {
 
     SortDropdown(String sortType) {
         this.sortType = sortType;
-
     }
 
     public String getSortType() {

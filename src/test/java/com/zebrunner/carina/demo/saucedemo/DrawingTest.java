@@ -21,7 +21,7 @@ public class DrawingTest implements IAbstractTest {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
         ProductListPageBase productListPage = loginPage.autofillLogin();
-        BurgerMenuPageBase burgerMenu = productListPage.clickOnBurgerMenu();
+        BurgerMenuPageBase burgerMenu = productListPage.getHeader().clickOnBurgerMenu();
         DrawingPageBase drawingArea = burgerMenu.clickOnDrawingButton();
         Assert.assertTrue(drawingArea.isEmptyPadPresent(), "Drawing area isn't empty.");
         drawingArea.drawPicture();

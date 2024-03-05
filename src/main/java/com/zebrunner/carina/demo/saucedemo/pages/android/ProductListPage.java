@@ -5,6 +5,8 @@ import com.zebrunner.carina.demo.saucedemo.enums.SortDropdown;
 import com.zebrunner.carina.demo.saucedemo.pages.common.BurgerMenuPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.CartPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.ProductListPageBase;
+import com.zebrunner.carina.demo.saucedemo.pages.components.android.HeaderMenu;
+import com.zebrunner.carina.demo.saucedemo.pages.components.common.HeaderMenuBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
@@ -20,11 +22,9 @@ import java.util.stream.IntStream;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductListPageBase.class)
 public class ProductListPage extends ProductListPageBase implements IMobileUtils {
-    @FindBy(xpath = "//*[@content-desc='test-Menu']")
-    private ExtendedWebElement burgerMenu;
 
-    @FindBy(xpath = "//*[@content-desc='test-Cart']")
-    private ExtendedWebElement cartBtn;
+    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Menu']/parent::android.view.ViewGroup")
+    private HeaderMenu header;
 
     @FindBy(xpath = "//*[@content-desc='test-Modal Selector Button']")
     private ExtendedWebElement filterBtn;
@@ -40,6 +40,7 @@ public class ProductListPage extends ProductListPageBase implements IMobileUtils
 
     @FindBy(xpath = "//*[contains(@text,'%s')]/following-sibling::*[@content-desc='test-ADD TO CART']")
     private ExtendedWebElement addToCartBtn;
+
     @FindBy(xpath = "//*[contains(@text,'Terms of Service')]")
     private ExtendedWebElement footerText;
 
@@ -48,26 +49,9 @@ public class ProductListPage extends ProductListPageBase implements IMobileUtils
     }
 
     @Override
-    public boolean isBurgerMenuPresent() {
-        return burgerMenu.isElementPresent(Duration.ofSeconds(3));
-    }
-
-    @Override
     public void clickAddToCartBtnEnum(ProductName productName) {
         addToCartBtn.format(productName.getProductType()).click();
 
-    }
-
-    @Override
-    public CartPageBase clickOnCartBtn() {
-        cartBtn.click();
-        return initPage(getDriver(), CartPageBase.class);
-    }
-
-    @Override
-    public BurgerMenuPageBase clickOnBurgerMenu() {
-        burgerMenu.click();
-        return initPage(getDriver(), BurgerMenuPageBase.class);
     }
 
     @Override
@@ -129,5 +113,10 @@ public class ProductListPage extends ProductListPageBase implements IMobileUtils
         List<String> sortedList = new ArrayList<>(newProductsList);
         sortedList.sort(String::compareTo);
         return newProductsList.equals(sortedList);
+    }
+
+    @Override
+    public HeaderMenuBase getHeader() {
+        return header;
     }
 }

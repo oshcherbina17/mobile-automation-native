@@ -3,24 +3,26 @@ package com.zebrunner.carina.demo.saucedemo.pages.ios;
 import com.zebrunner.carina.demo.saucedemo.enums.ProductName;
 import com.zebrunner.carina.demo.saucedemo.pages.common.CartPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.CheckoutInfoPageBase;
-import com.zebrunner.carina.utils.exception.NotImplementedException;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CartPageBase.class)
-public class CartPage extends CartPageBase{
+public class CartPage extends CartPageBase {
 
     @ExtendedFindBy(iosPredicate = "name == '%s'")
-    protected ExtendedWebElement cartProductName;
+    private ExtendedWebElement cartProductName;
 
     @ExtendedFindBy(iosPredicate = "name == 'test-REMOVE'")
-    protected ExtendedWebElement removeProductFromCartBtn;
+    private ExtendedWebElement removeProductFromCartBtn;
+
+    @FindBy(xpath = "//*[@name='Sauce Labs Backpack']/../following-sibling::*[@name='test-Price']//*[@name='test-REMOVE']")
+    private ExtendedWebElement removeByNameProductFromCartBtn;
 
     @ExtendedFindBy(iosPredicate = "name == 'test-CHECKOUT'")
-    protected ExtendedWebElement checkoutBtn;
-
+    private ExtendedWebElement checkoutBtn;
 
     public CartPage(WebDriver driver) {
         super(driver);
@@ -32,18 +34,14 @@ public class CartPage extends CartPageBase{
     }
 
     @Override
-    public void removeProductFromCart(){
-        removeProductFromCartBtn.click();
+    public void removeAllProductsFromCart() {
+        while (removeProductFromCartBtn.isElementPresent()) {
+            removeProductFromCartBtn.click();
+        }
     }
 
-    @Override
-    public void removeProductFromCart(ProductName productName) {
-        throw new NotImplementedException();
-    }
-
-    @Override
-    public int getItemsListSize() {
-        return 0;
+    public void removeProductsByNameFromCart(ProductName productName) {
+        removeByNameProductFromCartBtn.format(productName.getProductType()).click();
     }
 
     @Override

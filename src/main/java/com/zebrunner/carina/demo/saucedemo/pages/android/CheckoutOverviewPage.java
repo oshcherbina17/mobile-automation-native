@@ -11,11 +11,12 @@ import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CheckoutOverviewPageBase.class)
 public class CheckoutOverviewPage extends CheckoutOverviewPageBase implements IMobileUtils {
+
     @FindBy(xpath = "//*[contains(@text,'Total:')]")
-    protected ExtendedWebElement totalPrice;
+    private ExtendedWebElement totalPrice;
 
     @FindBy(xpath = "//*[@text='FINISH']")
-    protected ExtendedWebElement finishBtn;
+    private ExtendedWebElement finishBtn;
 
     public CheckoutOverviewPage(WebDriver driver) {
         super(driver);

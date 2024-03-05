@@ -15,8 +15,11 @@ public class CartPage extends CartPageBase {
     @FindBy(xpath = "//android.widget.TextView[@text='%s']")
     private ExtendedWebElement cartProductName;
 
-    @FindBy(xpath = "//*[contains(@text,'%s')]/../following-sibling::*[@content-desc='test-Price']//*[@content-desc='test-REMOVE']")
+    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-REMOVE']")
     private ExtendedWebElement removeProductFromCartBtn;
+
+    @FindBy(xpath = "//*[contains(@text,'%s')]/../following-sibling::*[@content-desc='test-Price']//*[@content-desc='test-REMOVE']")
+    private ExtendedWebElement removeByNameProductFromCartBtn;
 
     @FindBy(xpath = "//android.widget.TextView[@text='CHECKOUT']")
     private ExtendedWebElement checkoutBtn;
@@ -31,18 +34,15 @@ public class CartPage extends CartPageBase {
     }
 
     @Override
-    public void removeProductFromCart() {
-        throw new NotImplementedException();
+    public void removeAllProductsFromCart() {
+        while (removeProductFromCartBtn.isElementPresent()) {
+            removeProductFromCartBtn.click();
+        }
     }
 
     @Override
-    public void removeProductFromCart(ProductName productName) {
-        removeProductFromCartBtn.format(productName.getProductType()).click();
-    }
-
-    @Override
-    public int getItemsListSize() { //delete
-        return 0;
+    public void removeProductsByNameFromCart(ProductName productName) {
+        removeByNameProductFromCartBtn.format(productName.getProductType()).click();
     }
 
     @Override

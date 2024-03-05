@@ -10,12 +10,16 @@ import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CheckoutInfoPageBase.class)
 public class CheckoutInfoPage extends CheckoutInfoPageBase implements IMobileUtils {
+
     @FindBy(xpath = "//android.widget.EditText[@content-desc='test-First Name']")
     private ExtendedWebElement firsNameInput;
+
     @FindBy(xpath = "//android.widget.EditText[@content-desc='test-Last Name']")
     private ExtendedWebElement lastNameInput;
+
     @FindBy(xpath = "//android.widget.EditText[@content-desc='test-Zip/Postal Code']")
     private ExtendedWebElement zipInput;
+
     @FindBy(xpath = "//android.widget.TextView[@text='CONTINUE']")
     private ExtendedWebElement continueBtn;
 

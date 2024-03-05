@@ -10,17 +10,22 @@ import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
 public class LoginPage extends LoginPageBase implements IMobileUtils {
+
     @FindBy(xpath = "//*[@content-desc='test-Username']")
     private ExtendedWebElement loginInput;
+
     @FindBy(xpath = "//*[@content-desc='test-Password']")
     private ExtendedWebElement passwordInput;
+
     @FindBy(xpath = "//*[@content-desc='test-LOGIN']")
     private ExtendedWebElement loginBtn;
+
     @FindBy(xpath = "//*[@content-desc='test-Error message']")
     private ExtendedWebElement errorMessage;
 
     @FindBy(xpath = "//*[@text='standard_user']")
     private ExtendedWebElement autofillUserBtn;
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }

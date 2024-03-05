@@ -24,9 +24,9 @@ public class CheckoutTest implements IAbstractTest {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
         ProductListPageBase productListPage = loginPage.autofillLogin();
-        Assert.assertTrue(productListPage.isBurgerMenuPresent(), "Burger menu isn't presented");
+        Assert.assertTrue(productListPage.getHeader().isBurgerMenuPresent(), "Burger menu isn't presented");
         productListPage.clickAddToCartBtnEnum(ProductName.BACKPACK);
-        CartPageBase cartPage = productListPage.clickOnCartBtn();
+        CartPageBase cartPage = productListPage.getHeader().clickOnCartBtn();
         Assert.assertTrue(cartPage.isProductNameTextPresent(ProductName.BACKPACK), "Product name isn't presented");
         CheckoutInfoPageBase checkoutInfoPage = cartPage.clickOnCheckoutInfoBtn();
         checkoutInfoPage.typeUserInformation("John","Snow", "345672");

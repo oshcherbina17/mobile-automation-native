@@ -12,11 +12,12 @@ import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CheckoutOverviewPageBase.class)
 public class CheckoutOverviewPage extends CheckoutOverviewPageBase implements IMobileUtils {
+
     @FindBy( xpath = "//XCUIElementTypeStaticText[contains(@name,'Total')]")
-    protected ExtendedWebElement totalPrice;
+    private ExtendedWebElement totalPrice;
 
     @ExtendedFindBy(iosPredicate = "name == 'test-FINISH'")
-    protected ExtendedWebElement finishBtn;
+    private ExtendedWebElement finishBtn;
 
     public CheckoutOverviewPage(WebDriver driver) {
         super(driver);

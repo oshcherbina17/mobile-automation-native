@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = OrderCompletionPageBase.class)
 public class OrderCompletionPage extends OrderCompletionPageBase {
+
     @FindBy(xpath = "//android.widget.TextView[@text='THANK YOU FOR YOU ORDER']")
     private ExtendedWebElement completeTitle;
 

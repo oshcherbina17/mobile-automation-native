@@ -8,8 +8,9 @@ import org.openqa.selenium.WebDriver;
 
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = OrderCompletionPageBase.class)
 public class OrderCompletionPage extends OrderCompletionPageBase {
+
     @ExtendedFindBy(iosPredicate = "name == 'THANK YOU FOR YOU ORDER'")
-    protected ExtendedWebElement completeTitle;
+    private ExtendedWebElement completeTitle;
 
     public OrderCompletionPage(WebDriver driver) {
         super(driver);
