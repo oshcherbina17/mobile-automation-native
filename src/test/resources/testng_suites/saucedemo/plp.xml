@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Saucedemo - PLP Test" verbose="1" parallel="methods">
+
+	<test name="sortLowToHighTest">
+		<classes>
+			<class name="com.zebrunner.carina.demo.saucedemo.PLPTest" />
+		</classes>
+	</test>
+	<test name="sortHighToLowTest">
+		<classes>
+			<class name="com.zebrunner.carina.demo.saucedemo.PLPTest" />
+		</classes>
+	</test><test name="sortProductsFromAtoZTest">
+		<classes>
+			<class name="com.zebrunner.carina.demo.saucedemo.PLPTest" />
+		</classes>
+	</test>
+
+</suite>

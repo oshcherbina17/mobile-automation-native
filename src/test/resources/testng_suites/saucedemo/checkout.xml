@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Saucedemo - Checkout Test" verbose="1" parallel="methods">
+
+
+	<test name="verifyCheckoutProcessTest">
+		<classes>
+			<class name="com.zebrunner.carina.demo.saucedemo.CheckoutTest" />
+		</classes>
+	</test>
+
+</suite>
