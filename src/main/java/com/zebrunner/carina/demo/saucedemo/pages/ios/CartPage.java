@@ -9,11 +9,17 @@ import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = CartPageBase.class)
 public class CartPage extends CartPageBase {
 
     @ExtendedFindBy(iosPredicate = "name == '%s'")
     private ExtendedWebElement cartProductName;
+
+    @FindBy(xpath = "//XCUIElementTypeOther[@name='test-Description']//XCUIElementTypeStaticText[1]")
+    private List<ExtendedWebElement> cartProductListName;
 
     @ExtendedFindBy(iosPredicate = "name == 'test-REMOVE'")
     private ExtendedWebElement removeProductFromCartBtn;
@@ -34,6 +40,11 @@ public class CartPage extends CartPageBase {
     }
 
     @Override
+    public boolean isButtonPresent() {
+        return false;
+    }
+
+    @Override
     public void removeAllProductsFromCart() {
         while (removeProductFromCartBtn.isElementPresent()) {
             removeProductFromCartBtn.click();
@@ -48,5 +59,19 @@ public class CartPage extends CartPageBase {
     public CheckoutInfoPageBase clickOnCheckoutInfoBtn() {
         checkoutBtn.click();
         return initPage(getDriver(), CheckoutInfoPageBase.class);
+    }
+
+    @Override
+    public List<String> getProductList() {
+        List<String> list = new ArrayList<>();
+        for (ExtendedWebElement productTitle : cartProductListName) {
+            list.add(productTitle.getText());
+        }
+        return list;
+    }
+
+    @Override
+    public boolean compareProductTitles(List<String> productTitles) {
+        return  productTitles.stream().anyMatch(element -> getProductList().contains(element));
     }
 }

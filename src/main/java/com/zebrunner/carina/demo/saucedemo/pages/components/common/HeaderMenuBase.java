@@ -5,9 +5,11 @@ import com.zebrunner.carina.demo.saucedemo.pages.common.BurgerMenuPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.CartPageBase;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
+import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
+
+import java.time.Duration;
 
 public abstract class HeaderMenuBase extends AbstractUIObject {
 
@@ -21,3 +23,4 @@ public abstract class HeaderMenuBase extends AbstractUIObject {
 
     public abstract boolean isBurgerMenuPresent();
 }
+

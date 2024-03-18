@@ -9,30 +9,26 @@ import com.zebrunner.carina.demo.saucedemo.pages.common.CartPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.LoginPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.ProductListPageBase;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class CartTest implements IAbstractTest {
-
-    LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
-
-    ProductListPageBase productListPage = initPage(getDriver(), ProductListPageBase.class);
-
-    @BeforeMethod
-    public void loginTest() {
-        Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
-        loginPage.autofillLogin();
-        Assert.assertTrue(productListPage.getHeader().isBurgerMenuPresent(), "Burger menu isn't presented");
-    }
+    List<String> productTitles = Arrays.asList("Sauce Labs Bike Light", "Sauce Labs Backpack");
 
     @Test()
     @MethodOwner(owner = "oshcherbina")
     @TestCaseKey("CR1-6")
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void addProductToCartTest() {
-        productListPage.clickAddToCartBtnEnum(ProductName.BACKPACK);
-        CartPageBase cartPage = productListPage.getHeader().clickOnCartBtn();
-        Assert.assertTrue(cartPage.isProductNameTextPresent(ProductName.BACKPACK), "Product name isn't presented");
+        LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
+        Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
+        ProductListPageBase productListPage = loginPage.autofillLogin();
+        Assert.assertTrue(productListPage.getHeaderMenu().isBurgerMenuPresent(), "Burger menu isn't presented");
+        productListPage.addProductsToCart(productTitles);
+        CartPageBase cartPage = productListPage.getHeaderMenu().clickOnCartBtn();
+        Assert.assertTrue(cartPage.compareProductTitles(productTitles), "Product titles isn't presented");
     }
 
     @Test()
@@ -40,10 +36,14 @@ public class CartTest implements IAbstractTest {
     @TestCaseKey("CR1-8")
     @TestLabel(name = "feature", value = {"mobile", "regression"})
     public void removeProductsFromCartTest() {
-        productListPage.clickAddToCartBtnEnum(ProductName.BACKPACK);
-        CartPageBase cartPage = productListPage.getHeader().clickOnCartBtn();
-        Assert.assertTrue(cartPage.isProductNameTextPresent(ProductName.BACKPACK), "Product name isn't presented");
-        cartPage.removeProductsByNameFromCart(ProductName.BACKPACK);
-        Assert.assertFalse(cartPage.isProductNameTextPresent(ProductName.BACKPACK),"Product name is presented in the cart");
+        LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
+        Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
+        ProductListPageBase productListPage = loginPage.autofillLogin();
+        Assert.assertTrue(productListPage.getHeaderMenu().isBurgerMenuPresent(), "Burger menu isn't presented");
+        productListPage.addProductsToCart(productTitles);
+        CartPageBase cartPage = productListPage.getHeaderMenu().clickOnCartBtn();
+        Assert.assertTrue(cartPage.compareProductTitles(productTitles), "Product titles isn't presented");
+        cartPage.removeAllProductsFromCart();
+        Assert.assertFalse(cartPage.isButtonPresent(), "Remove button is presented in the cart");
     }
 }

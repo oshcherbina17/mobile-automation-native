@@ -12,4 +12,8 @@ public abstract class CheckoutOverviewPageBase extends AbstractPage {
     public abstract boolean isTotalPricePresent();
 
     public abstract OrderCompletionPageBase clickOnFinishBtn();
+
+    public abstract double overallProductPrice();
+
+    public abstract double getTotalPrice();
 }

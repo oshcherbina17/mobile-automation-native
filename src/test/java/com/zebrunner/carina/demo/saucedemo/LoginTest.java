@@ -1,6 +1,5 @@
 package com.zebrunner.carina.demo.saucedemo;
 
-
 import com.zebrunner.agent.core.annotation.TestCaseKey;
 import com.zebrunner.agent.core.annotation.TestLabel;
 import com.zebrunner.carina.core.IAbstractTest;
@@ -21,7 +20,7 @@ public class LoginTest implements IAbstractTest, IMobileUtils {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
         ProductListPageBase productListPage = loginPage.login("standard_user", "secret_sauce");
-        Assert.assertTrue(productListPage.getHeader().isBurgerMenuPresent(), "Burger menu isn't presented");
+        Assert.assertTrue(productListPage.getHeaderMenu().isBurgerMenuPresent(), "Burger menu isn't presented");
     }
 
     @Test()
@@ -54,6 +53,6 @@ public class LoginTest implements IAbstractTest, IMobileUtils {
         LoginPageBase loginPage = initPage(getDriver(), LoginPageBase.class);
         Assert.assertTrue(loginPage.isPageOpened(), "Login page isn't opened");
         ProductListPageBase productListPage = loginPage.autofillLogin();
-        Assert.assertTrue(productListPage.getHeader().isBurgerMenuPresent(), "Burger menu isn't presented");
+        Assert.assertTrue(productListPage.getHeaderMenu().isBurgerMenuPresent(), "Burger menu isn't presented");
     }
 }

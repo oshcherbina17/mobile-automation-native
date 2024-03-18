@@ -1,20 +1,20 @@
 package com.zebrunner.carina.demo.saucedemo.pages.common;
 
 import com.zebrunner.carina.demo.saucedemo.enums.ProductName;
-import com.zebrunner.carina.demo.saucedemo.enums.SortDropdown;
-import com.zebrunner.carina.demo.saucedemo.pages.components.common.HeaderMenuBase;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
+import com.zebrunner.carina.demo.saucedemo.enums.SortType;
 import org.openqa.selenium.WebDriver;
 
-public abstract class ProductListPageBase extends AbstractPage {
+import java.util.List;
+
+public abstract class ProductListPageBase extends SauceAbstractPage {
 
     public ProductListPageBase(WebDriver driver) {
         super(driver);
     }
 
-    public abstract void clickAddToCartBtnEnum(ProductName productName);
+    public abstract void addProductsToCart(List<String> productTitles);
 
-    public abstract void clickOnDropdownMenu(SortDropdown sortDropdown);
+    public abstract void sortProduct(SortType sortType);
 
     public abstract boolean sortLowToHighPrice();
 
@@ -22,5 +22,5 @@ public abstract class ProductListPageBase extends AbstractPage {
 
     public abstract boolean sortProductFromAToZ();
 
-    public abstract HeaderMenuBase getHeader();
+    public abstract void openFilter();
 }

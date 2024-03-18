@@ -37,6 +37,6 @@ public class HeaderMenu extends HeaderMenuBase {
 
     @Override
     public boolean isBurgerMenuPresent() {
-        return burgerMenu.isElementPresent(Duration.ofSeconds(3));
+        return burgerMenu.isElementPresent(Duration.ofSeconds(5));
     }
 }

@@ -1,21 +1,17 @@
 package com.zebrunner.carina.demo.saucedemo.pages.android;
 
-import com.zebrunner.carina.demo.saucedemo.enums.ProductName;
-import com.zebrunner.carina.demo.saucedemo.enums.SortDropdown;
-import com.zebrunner.carina.demo.saucedemo.pages.common.BurgerMenuPageBase;
-import com.zebrunner.carina.demo.saucedemo.pages.common.CartPageBase;
+import com.zebrunner.carina.demo.saucedemo.enums.SortType;
 import com.zebrunner.carina.demo.saucedemo.pages.common.ProductListPageBase;
-import com.zebrunner.carina.demo.saucedemo.pages.components.android.HeaderMenu;
-import com.zebrunner.carina.demo.saucedemo.pages.components.common.HeaderMenuBase;
+import com.zebrunner.carina.demo.saucedemo.pages.components.android.FilterComponent;
+import com.zebrunner.carina.demo.saucedemo.pages.components.android.ProductListItemComponent;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -23,41 +19,55 @@ import java.util.stream.IntStream;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = ProductListPageBase.class)
 public class ProductListPage extends ProductListPageBase implements IMobileUtils {
 
-    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Menu']/parent::android.view.ViewGroup")
-    private HeaderMenu header;
-
-    @FindBy(xpath = "//*[@content-desc='test-Modal Selector Button']")
+    @ExtendedFindBy (accessibilityId = "test-Modal Selector Button")
     private ExtendedWebElement filterBtn;
 
-    @FindBy(xpath = "//android.widget.TextView[@text='%s']")
-    private ExtendedWebElement sortDropdownBtn;
-
-    @FindBy(xpath = "//*[@content-desc='test-Item title']")
+    @FindBy(xpath = "//android.widget.TextView[@content-desc='test-Item title']")
     private List<ExtendedWebElement> productNameList;
 
-    @FindBy(xpath = "//*[@content-desc='test-Price']")
+    @ExtendedFindBy(accessibilityId = "test-Item")
+    private List<ProductListItemComponent> productListItems;
+
+    @FindBy(xpath = "//android.widget.TextView[@content-desc='test-Price']")
     private List<ExtendedWebElement> priceList;
 
-    @FindBy(xpath = "//*[contains(@text,'%s')]/following-sibling::*[@content-desc='test-ADD TO CART']")
-    private ExtendedWebElement addToCartBtn;
+    @FindBy(xpath = "//android.widget.TextView[contains(@text,'%s')]/following-sibling::*[@content-desc='test-ADD TO CART']")
+    private ExtendedWebElement addToCartBtnEnum;
 
-    @FindBy(xpath = "//*[contains(@text,'Terms of Service')]")
+    @FindBy(xpath = "//android.widget.TextView[contains(@text,'Terms of Service')]")
     private ExtendedWebElement footerText;
+
+    @ExtendedFindBy(accessibilityId = "Selector container")
+    private FilterComponent filterComponent;
 
     public ProductListPage(WebDriver driver) {
         super(driver);
     }
 
-    @Override
-    public void clickAddToCartBtnEnum(ProductName productName) {
-        addToCartBtn.format(productName.getProductType()).click();
+   @Override
+    public void addProductsToCart(List<String> productTitles) {
+        int maxIterations = 3;
+        List<String> titles = new ArrayList<>();
+        do {
+            for (ProductListItemComponent productListItem : productListItems) {
+                try {
+                    String productTitle = productListItem.getItemTitle();
+                    if (productTitles.contains(productTitle) && !titles.contains(productTitle)) {
+                        titles.add(productTitle);
+                        productListItem.addToCartButton();
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        } while (!swipe(footerText, Direction.UP, 2, 600) && --maxIterations != 0);
 
     }
 
     @Override
-    public void clickOnDropdownMenu(SortDropdown sortDropdown) {
-        filterBtn.click();
-        sortDropdownBtn.format(sortDropdown.getSortType()).click();
+    public void sortProduct(SortType sortType) {
+        openFilter();
+        filterComponent.sortBy(sortType);
     }
 
     private List<Double> getPricesList() {
@@ -115,8 +125,7 @@ public class ProductListPage extends ProductListPageBase implements IMobileUtils
         return newProductsList.equals(sortedList);
     }
 
-    @Override
-    public HeaderMenuBase getHeader() {
-        return header;
+    public void openFilter() {
+        filterBtn.click();
     }
 }

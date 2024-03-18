@@ -1,5 +1,6 @@
 package com.zebrunner.carina.demo.saucedemo.pages.common;
 
+import com.zebrunner.carina.demo.saucedemo.enums.MenuItems;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 
@@ -14,4 +15,6 @@ public abstract class BurgerMenuPageBase extends AbstractPage {
     public abstract LoginPageBase clickOnLogoutBtn();
 
     public abstract DrawingPageBase clickOnDrawingButton();
+
+    public abstract AbstractPage pickMenuContent(MenuItems item);
 }

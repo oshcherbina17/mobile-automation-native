@@ -1,11 +1,14 @@
 package com.zebrunner.carina.demo.saucedemo.pages.ios;
 
+import com.zebrunner.carina.demo.saucedemo.enums.MenuItems;
 import com.zebrunner.carina.demo.saucedemo.pages.common.BurgerMenuPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.DrawingPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.LoginPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
+import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
@@ -24,6 +27,8 @@ public class BurgerMenuPage extends BurgerMenuPageBase {
 
     @ExtendedFindBy(iosPredicate = "name == 'test-DRAWING'")
     private ExtendedWebElement drawingButton;
+    @ExtendedFindBy(accessibilityId = "%s")
+    private ExtendedWebElement menuContent;
 
     public BurgerMenuPage(WebDriver driver) {
         super(driver);
@@ -45,4 +50,20 @@ public class BurgerMenuPage extends BurgerMenuPageBase {
         drawingButton.click();
         return initPage(getDriver(), DrawingPageBase.class);
     }
+
+    @Override
+    public AbstractPage pickMenuContent(MenuItems item) {
+        switch (item) {
+            case DRAWING:
+                menuContent.format(item.getAccessibilityId()).click();
+                return new DrawingPage(getDriver());
+            case LOGOUT:
+                menuContent.format(item.getAccessibilityId()).click();
+                return initPage(getDriver(), LoginPageBase.class);
+            default:
+                throw new NotImplementedException("Menu item " + item.getAccessibilityId() + " not implemented");
+        }
+    }
+
 }
+

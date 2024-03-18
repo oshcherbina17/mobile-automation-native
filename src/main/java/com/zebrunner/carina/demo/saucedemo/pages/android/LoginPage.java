@@ -5,25 +5,26 @@ import com.zebrunner.carina.demo.saucedemo.pages.common.ProductListPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = LoginPageBase.class)
 public class LoginPage extends LoginPageBase implements IMobileUtils {
 
-    @FindBy(xpath = "//*[@content-desc='test-Username']")
+    @ExtendedFindBy(accessibilityId = "test-Username")
     private ExtendedWebElement loginInput;
 
-    @FindBy(xpath = "//*[@content-desc='test-Password']")
+    @ExtendedFindBy(accessibilityId = "test-Password")
     private ExtendedWebElement passwordInput;
 
-    @FindBy(xpath = "//*[@content-desc='test-LOGIN']")
+    @ExtendedFindBy(accessibilityId = "test-LOGIN")
     private ExtendedWebElement loginBtn;
 
-    @FindBy(xpath = "//*[@content-desc='test-Error message']")
+    @ExtendedFindBy(accessibilityId = "test-Error message")
     private ExtendedWebElement errorMessage;
 
-    @FindBy(xpath = "//*[@text='standard_user']")
+    @ExtendedFindBy(accessibilityId = "test-standard_user")
     private ExtendedWebElement autofillUserBtn;
 
     public LoginPage(WebDriver driver) {

@@ -5,7 +5,7 @@ import com.zebrunner.carina.demo.saucedemo.pages.common.BurgerMenuPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.common.CartPageBase;
 import com.zebrunner.carina.demo.saucedemo.pages.components.common.HeaderMenuBase;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
+import com.zebrunner.carina.webdriver.locator.ExtendedFindBy;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -14,10 +14,10 @@ import java.time.Duration;
 
 public class HeaderMenu extends HeaderMenuBase {
 
-    @FindBy(xpath = "//*[@content-desc='test-Menu']")
+    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Menu']")
     private ExtendedWebElement burgerMenu;
 
-    @FindBy(xpath = "//*[@content-desc='test-Cart']")
+    @FindBy(xpath = "//android.view.ViewGroup[@content-desc='test-Cart']")
     private ExtendedWebElement cartBtn;
 
     public HeaderMenu(WebDriver driver, SearchContext searchContext) {
@@ -33,12 +33,10 @@ public class HeaderMenu extends HeaderMenuBase {
     public BurgerMenuPageBase clickOnBurgerMenu() {
         burgerMenu.click();
         return initPage(getDriver(), BurgerMenuPageBase.class);
-
     }
 
     @Override
     public boolean isBurgerMenuPresent() {
         return burgerMenu.isElementPresent(Duration.ofSeconds(3));
-
     }
 }
